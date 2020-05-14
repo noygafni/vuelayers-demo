@@ -14,6 +14,7 @@
       <vl-interaction-draw 
         type="Circle"
         source="the-source"
+        :geometry-function="squareGeometryFunction()"
       >
         <vl-style-box>
           <vl-style-stroke color="blue"></vl-style-stroke>
@@ -61,6 +62,7 @@
         lineGeometry: null,
         mousePosistionX: null,
         mousePosistionY: null,
+        square: null,
       }
     },
     components: {
@@ -68,7 +70,10 @@
     },
     methods: {
       squareGeometryFunction() {
-        return createRegularPolygon(4);
+        if (!this.square) {
+          this.square = createRegularPolygon(4);
+        }
+        return this.square;
       },
       formatLength(line) {
         const length = getLength(line);
